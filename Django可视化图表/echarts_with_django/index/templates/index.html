@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Echarts例子</title>
+</head>
+<body>
+
+
+<div id="bar_div" style="width: 400px;height:300px;"></div>
+
+
+{#导入js和echarts依赖#}
+{#查询：https://www.bootcdn.cn/#}
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.2/echarts.common.js"></script>
+
+<script>
+
+
+    // 柱状图
+    function show_bar(data) {
+
+        //控件
+        var bar_widget = echarts.init(document.getElementById('bar_div'));
+
+        //设置option
+        option = {
+            title: {
+                text: '简单的柱状图'
+            },
+            tooltip: {},
+            legend: {
+                data: ['销量']
+            },
+            xAxis: {
+                type: 'category',
+                data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: data,
+                type: 'bar'
+            }]
+        };
+
+        bar_widget.setOption(option)
+    }
+
+    //显示即加载调用
+    window.onload = function () {
+        //发送post请求，地址为index（Jquery）
+        $.ajax({
+            url: "/",
+            type: "POST",
+            data: {},
+            success: function (data) {
+                // 柱状图
+                show_bar(data['bar_datas']);
+
+                //后端返回的结果
+                console.log(data)
+            }
+        })
+    }
+</script>
+
+</body>
+</html>
