@@ -3,8 +3,7 @@
 ## Django
 
 * [Django可视化图表实例](./Django可视化图表)
-
-
+* [文件上传、下载实例](./file_up_and_down_demo)
 
 
 
